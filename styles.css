@@ -1,52 +1,72 @@
-/* Reset + barn-säker interaktion */
+/* ==============================
+   Reset + barnvänlig touch
+   ============================== */
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 
+  /* Ingen text- eller emoji-markering */
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   -webkit-user-drag: none;
-  touch-action: manipulation;
 }
 
+/* Tillåt scroll igen */
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior: auto;
 }
 
-/* Bakgrund */
+/* ==============================
+   Bakgrund & layout
+   ============================== */
+
 body {
-  background-color: #cfe9f6;
-  font-family: system-ui, sans-serif;
+  background-color: #cfe9f6; /* mjuk blå */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Titel */
+/* ==============================
+   Titel
+   ============================== */
+
 .app-title {
-  margin: 12px 0;
+  margin: 14px 0 10px;
   font-size: 28px;
-  font-weight: bold;
-  color: rgb(255, 255, 153);
+  font-weight: 700;
+  color: white;
+
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
 
-/* Grid med djur */
-.animal-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-  gap: 20px;
+/* ==============================
+   Grid med djur (knappar)
+   ============================== */
 
+.animal-grid {
   width: 90%;
   max-width: 700px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+
+  padding-bottom: 30px; /* luft för scroll */
 }
 
-/* Djurbilder = knappar */
+/* ==============================
+   Djurbilder = knappar
+   ============================== */
+
 .animal-grid img {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -56,4 +76,8 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 
   cursor: pointer;
+
+  /* iOS touch-fix */
+  touch-action: auto;
+  -webkit-tap-highlight-color: transparent;
 }
