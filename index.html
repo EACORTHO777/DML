@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>Djur-app</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+  content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover">
+
+<title>Djur-app</title>
+
+<!-- Mobil / surfplatta fullskärmsbeteende -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+
+      width: 100vw;
+        height: 100vh;
+        background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(120, 139, 248);
+  margin-top: 12px;
+  margin-bottom: 4px;
+
+  text-shadow:
+    0 2px 6px rgba(170, 169, 169, 0.7);
+}
+
+    /* Djurval högst upp */
+    .animal-picker {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background: none;
+    }
+
+    .animal-picker button {
+      font-size: 20px;
+      padding: 30px 30px;
+    }
+
+    /* Ljudknappar längst ner */
+    .sound-buttons {
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      background: none;
+    }
+
+    .sound-buttons button {
+      font-size: 24px;
+      padding: 20px 30px;
+    }
+
+    button {
+      background: rgba(255, 255, 255, 0.85);
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (orientation: portrait) {
+  body {
+    background-position: center 40%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+    <!-- Titel -->
+<div class="app-title">Djur med LEÅ 👶🏻</div>
+
+  <!-- Välj djur -->
+  <div class="animal-picker">
+   <button onclick="vibrate(); selectAnimal('cow')">🐮</button>
+    <button onclick="vibrate(); selectAnimal('horse')">🐴</button>
+    <button onclick="vibrate(); selectAnimal('cat')">🐱</button>
+    <button onclick="vibrate(); selectAnimal('dog')">🐶</button>
+    <button onclick="vibrate(); selectAnimal('duck')">🦆</button>
+  </div>
+
+  <!-- Ljudknappar -->
+  <div class="sound-buttons">
+    <button onclick="playSound(0)">🔊</button>
+    <button onclick="playSound(1)">🔊</button>
+    <button onclick="playSound(2)">🔊</button>
+  </div>
+
+  <script>
+  let currentSounds = [];
+  let fullscreenActivated = false;
+
+  function requestFullscreen() {
+    if (fullscreenActivated) return;
+
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+
+    fullscreenActivated = true;
+  }
+
+  function vibrate(ms = 50) {
+  if (navigator.vibrate) {
+    navigator.vibrate(ms);
+  }
+}
+
+    const animals = {
+      cow: {
+        bg: "images/cow.jpg",
+        sounds: ["sounds/cow1.mp3", "sounds/cow2.mp3", "sounds/cow3.mp3"]
+      },
+      horse: {
+        bg: "images/horse.jpg",
+        sounds: ["sounds/horse1.mp3", "sounds/horse2.mp3", "sounds/horse3.mp3"]
+      },
+      cat: {
+        bg: "images/cat.jpg",
+        sounds: ["sounds/cat1.mp3", "sounds/cat2.mp3", "sounds/cat3.mp3"]
+      },
+      dog: {
+        bg: "images/dog.jpg",
+        sounds: ["sounds/dog1.mp3", "sounds/dog2.mp3", "sounds/dog3.mp3"]
+      },
+      duck: {
+        bg: "images/duck.jpg",
+        sounds: ["sounds/duck1.mp3", "sounds/duck2.mp3", "sounds/duck3.mp3"]
+      }
+    };
+
+function selectAnimal(animal) {
+  requestFullscreen();
+  document.body.style.backgroundImage = `url('${animals[animal].bg}')`;
+  currentSounds = animals[animal].sounds;
+}
+
+    function playSound(index) {
+      if (!currentSounds[index]) return;
+      const audio = new Audio(currentSounds[index]);
+      audio.play();
+    }
+  </script>
+
+</body>
+</html>
