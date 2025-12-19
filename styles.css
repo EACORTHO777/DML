@@ -1,0 +1,59 @@
+/* Reset + barn-säker interaktion */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Bakgrund */
+body {
+  background-color: #cfe9f6;
+  font-family: system-ui, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Titel */
+.app-title {
+  margin: 12px 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(255, 255, 153);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* Grid med djur */
+.animal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  gap: 20px;
+
+  width: 90%;
+  max-width: 700px;
+}
+
+/* Djurbilder = knappar */
+.animal-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+
+  border-radius: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  cursor: pointer;
+}
